@@ -1,0 +1,14 @@
+@import 'configs/variables';
+@import 'components/misc';
+@import 'layout/header';
+@import 'layout/footer';
+
+table, td {
+    border: 2px solid black;
+}
+ 
+#map{
+    height: 99vh;
+    width: 75%;
+    float: left;
+}
