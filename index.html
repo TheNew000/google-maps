@@ -15,40 +15,67 @@
 </head>
 <body ng-controller="cityController">
 
-<div id="map"></div>
-    <table>
-        <tbody>
-            <input type="text" ng-model="userCity" placeholder="Search City">
-            <tr>
-                <!-- <th>Rank</th> -->
-                <th>City Name</th>
-                <th>State</th>
-                <!-- <th>Last Census</th>
-                <th>Change</th>
-                <th>Land Area</th>
-                <th>Land Area (Km)</th>
-                <th>Population Density</th>
-                <th>Population Density (Km)</th>
-                <th>Latitude</th>
-                <th>Longitude</th>
-                <th>Latitude & Longitude</th> -->
-            </tr>
-            <tr ng-repeat="city in cities track by $index">
-                <td><a href="" ng-click="triggerClick($index)">{{city.city}}</a></td>
-                <!-- <td>{{city.yearRank}}</td> -->
-                <td>{{city.state}}</td>
-<!--                 <td>{{city.lastCensus}}</td>
-                <td>{{city.change}}</td>
-                <td>{{city.landArea}}</td>
-                <td>{{city.landAreaInKm}}</td>
-                <td>{{city.lastPopDensity}}</td>
-                <td>{{city.lastPopDensityInKM}}</td>
-                <td>{{city.lat}}</td>
-                <td>{{city.lon}}</td>
-                <td>{{city.latLon}}</td> -->
-            </tr>
-        </tbody>
-    </table>
+<div id="map">
+</div>
+   
+    <div id="list-window">
+        <label>Starting Point:
+            <select ng-model="originCity"
+                ng-options="city.city for city in cities">
+            </select>
+        </label><br/>
+        <label>Destination:
+            <select ng-model="destinationCity"
+                ng-options="city.city for city in cities">
+            </select>
+        </label>
+        <button type="submit" ng-click="getDirections(originCity, destinationCity)" class="btn btn-default">Get Directions</button><br/>
+        
+        <form ng-submit="newSearch()">
+            <button type="submit">Look For</button>
+            <input type="text" ng-model="userSearch" placeholder="Place's Search"><br/>
+        </form>
+        <form ng-submit="updateMarkers()">
+            <input type="text" ng-model="citiesFilter" id="filter-input" placeholder="City Search">
+            <input type="submit" value="Update the map">
+            <table>
+                <tbody>
+                    <tr>
+                        <!-- <th>Rank</th> -->
+                        <th>City Name</th>
+                        <th>State</th>
+                        <!-- <th>Last Census</th>
+                        <th>Change</th>
+                        <th>Land Area</th>
+                        <th>Land Area (Km)</th>
+                        <th>Population Density</th>
+                        <th>Population Density (Km)</th>
+                        <th>Latitude</th>
+                        <th>Longitude</th>
+                        <th>Latitude & Longitude</th> -->
+                    </tr>
+                    <tr ng-repeat="city in (filteredCities = (cities | filter: citiesFilter)) track by $index">
+                        <td><a href="" ng-click="triggerClick($index)">{{city.city}}</a></td>
+                        <!-- <td>{{city.yearRank}}</td> -->
+                        <td>{{city.state}}</td>
+                   <!-- <td>{{city.lastCensus}}</td>
+                        <td>{{city.change}}</td>
+                        <td>{{city.landArea}}</td>
+                        <td>{{city.landAreaInKm}}</td>
+                        <td>{{city.lastPopDensity}}</td>
+                        <td>{{city.lastPopDensityInKM}}</td>
+                        <td>{{city.lat}}</td>
+                        <td>{{city.lon}}</td>
+                        <td>{{city.latLon}}</td> -->
+                        <td>
+                            <button type="submit" ng-click="zoomToCity(city.lat, city.lon)">Zoom to City</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </form>
+    </div>
+
 
 </body>
 </html>
