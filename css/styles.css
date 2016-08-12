@@ -56,6 +56,10 @@ table, td {
 /* line 10, ../compass/sass/styles.scss */
 #map {
   height: 99vh;
+<<<<<<< HEAD
   width: 100%;
+=======
+  width: 70%;
+>>>>>>> origin/master
   float: left;
 }
