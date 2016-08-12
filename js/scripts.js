@@ -1,16 +1,16 @@
-var myApp = angular.module('cityApp',[]);
-myApp.controller('cityController', function($scope, $http) {
+var myApp = angular.module('monsterApp',[]);
+myApp.controller('monsterController', function($scope, $http) {
 
+    $scope.Math = window.Math;
     var myLatlng = {lat: 40.000, lng: -98.000};
+
     var map = new google.maps.Map(document.getElementById('map'), {
-      zoom: 4,
+      zoom: 5,
       center: myLatlng,
       mapTypeId: 'terrain'
     });
     var markers = [];
     var apiKey = 'AIzaSyDU6EmqpUmvTiwjIZDIayOrd0Kev8Y2WxM';
-    var elevator = new google.maps.ElevationService;
-
 
     function createMarker(city){
         var cityLatlng = {lat: city.lat, lng: city.lon};
@@ -21,41 +21,73 @@ myApp.controller('cityController', function($scope, $http) {
             });
 
 
- 
-        // var elevationurl = 'https://maps.googleapis.com/maps/api/elevation/json?locations=' + city.lat + ',' + city.lon + '&key=AIzaSyDU6EmqpUmvTiwjIZDIayOrd0Kev8Y2WxM';
+        var triangleCoords = [
+          {lat: 25.774, lng: -80.19},
+          {lat: 18.466, lng: -66.118},
+          {lat: 32.321, lng: -64.757}
+        ];
 
-  
+        var bermudaTriangle = new google.maps.Polygon({paths: triangleCoords});
 
-        // elevator.getElevationForLocations({'locations': [cityLatlng]}, function(results, status){
-        //         if(status === 'OK'){
-        //             if(results[0]){
-        //                 'The Elevation is: ' +results[0].elevation.toFixed(3) + ' Km!';
-        //             }else{
-        //                 "Sorry, no elevation results found!";
-        //             }
-        //         }else{
-        //             "Elevation service failed due to: " + status;
-        //         }
-        //     });
+        google.maps.event.addListener(map, 'click', function(e) {
+          var resultColor =
+              google.maps.geometry.poly.containsLocation(e.latLng, bermudaTriangle) ?
+              'red' :
+              'green';
 
-        var infoWindow = new google.maps.InfoWindow({
-            content: city.city + ", " + city.state + " " 
+          new google.maps.Marker({
+            position: e.latLng,
+            map: map,
+            icon: {
+              path: google.maps.SymbolPath.CIRCLE,
+              fillColor: resultColor,
+              fillOpacity: .2,
+              strokeColor: 'white',
+              strokeWeight: .5,
+              scale: 10
+            }
+          });
         });
 
-        google.maps.event.addListener(marker, 'click', function(){
-            infoWindow.open(map, marker);
+    //     var infoWindow = new google.maps.InfoWindow({
+    //         content: city.city + ", " + city.state + " " 
+    //     });
 
-        });
-        markers.push(marker);
-    }
+    //     google.maps.event.addListener(marker, 'click', function(){
+    //         infoWindow.open(map, marker);
 
-    $scope.triggerClick = function(index){
-        google.maps.event.trigger(markers[index],'click');
-        map.setCenter(markers[index].position);
-    }
+    //     });
+    //     markers.push(marker);
+    // }
 
-    $scope.cities = cities;
-    for (var i = 0; i < $scope.cities.length; i++) {
-        createMarker($scope.cities[i]);
-    }
+    // $scope.triggerClick = function(index){
+    //     google.maps.event.trigger(markers[index],'click');
+    //     map.setCenter(markers[index].position);
+    // }
+
+    // $scope.cities = cities;
+    // for (var i = 0; i < $scope.cities.length; i++) {
+    //     createMarker($scope.cities[i]);
+    // }
+console.log(map.getBounds());
+    
 });
+
+// // LONGITUDE -180 to + 180
+// function generateRandomLong() {
+//     var num = (Math.random()*180).toFixed(3);
+//     var posorneg = Math.floor(Math.random());
+//     if (posorneg == 0) {
+//         num = num * -1;
+//     }
+//     return num;
+// }
+// // LATITUDE -90 to +90
+// function generateRandomLat() {
+//     var num = (Math.random()*90).toFixed(3);
+//     var posorneg = Math.floor(Math.random());
+//     if (posorneg == 0) {
+//         num = num * -1;
+//     }
+//     return num;
+// }

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html ng-app="conLocApp">
+  <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <title>Polygon arrays</title>
+    <style>
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      #map {
+        height: 100%;
+      }
+    </style>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDU6EmqpUmvTiwjIZDIayOrd0Kev8Y2WxM&libraries=geometry"></script>
+    <script src="conLoc.js"></script>
+  </head>
+  <body ng-controller="conLocController">
+    <div id="map"></div>
+  </body>
+</html>
