@@ -1,11 +1,8 @@
-<<<<<<< HEAD
 var myApp = angular.module('monsterApp',[]);
 myApp.controller('monsterController', function($scope, $http) {
 
-=======
 var myApp = angular.module('cityApp',[]);
 myApp.controller('cityController', function($scope, $http) {
->>>>>>> origin/master
     $scope.Math = window.Math;
     var myLatlng = {lat: 40.000, lng: -98.000};
 
@@ -19,10 +16,7 @@ myApp.controller('cityController', function($scope, $http) {
     var infoWindow = new google.maps.InfoWindow({});
 
     var apiKey = 'AIzaSyDU6EmqpUmvTiwjIZDIayOrd0Kev8Y2WxM';
-<<<<<<< HEAD
-=======
     var elevator = new google.maps.ElevationService;
->>>>>>> origin/master
 
     function createMarker(city){
         var icon = '';
@@ -39,7 +33,6 @@ myApp.controller('cityController', function($scope, $http) {
               icon: icon
             });
 
-<<<<<<< HEAD
 
         var triangleCoords = [
           {lat: 25.774, lng: -80.19},
@@ -111,7 +104,6 @@ console.log(map.getBounds());
 //     }
 //     return num;
 // }
-=======
         google.maps.event.addListener(marker, 'click', function(){
             infoWindow.setContent('<h4>' + city.city + ", " + city.state + '</h4>');
             infoWindow.open(map, marker);
@@ -248,4 +240,3 @@ console.log(map.getBounds());
 
 });
 
->>>>>>> origin/master
