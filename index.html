@@ -14,9 +14,8 @@
 
 </head>
 <body ng-controller="cityController">
-
-<div id="map">
-</div>
+<input id="pac-input" class="controls" ng-model="userInput" type="text" placeholder="Search Box">
+<div id="map"></div>
    
     <div id="list-window">
         <label>Starting Point:
@@ -31,10 +30,6 @@
         </label>
         <button type="submit" ng-click="getDirections(originCity, destinationCity)" class="btn btn-default">Get Directions</button><br/>
         
-        <form ng-submit="newSearch()">
-            <button type="submit">Look For</button>
-            <input type="text" ng-model="userSearch" placeholder="Place's Search"><br/>
-        </form>
         <form ng-submit="updateMarkers()">
             <input type="text" ng-model="citiesFilter" id="filter-input" placeholder="City Search">
             <input type="submit" value="Update the map">
